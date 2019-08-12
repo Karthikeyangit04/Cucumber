@@ -41,16 +41,9 @@ public class Addcustomer {
 
 	}
 
-	@When("click the customer details {string},{string},{string},{string},{string}")
-	public void click_the_customer_details(String A, String B, String C, String D, String E) {
-		driver.findElement(By.id("fname")).sendKeys(A);
-		driver.findElement(By.id("lname")).sendKeys(B);
-		driver.findElement(By.id("email")).sendKeys(C);
-		driver.findElement(By.xpath("(//*[@id='message'])[2]")).sendKeys(D);
-		driver.findElement(By.id("telephoneno")).sendKeys(E);
-		driver.findElement(By.xpath("//*[@type='submit']")).click();
 
-	}
+
+	
 
 	@Then("I validate the outcomes")
 	public void i_validate_the_outcomes() {
