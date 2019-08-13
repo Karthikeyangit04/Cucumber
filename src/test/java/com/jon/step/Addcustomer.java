@@ -1,5 +1,6 @@
 package com.jon.step;
 
+import java.util.List;
 import java.util.Map;
 
 import org.junit.Assert;
@@ -29,6 +30,19 @@ public class Addcustomer {
 
 	@When("enter the customer details")
 	public void enter_the_customer_details(io.cucumber.datatable.DataTable dataTable) {
+		List<String> datas = dataTable.asList(String.class);
+
+		driver.findElement(By.id("fname")).sendKeys(datas.get(0));
+		driver.findElement(By.id("lname")).sendKeys(datas.get(1));
+		driver.findElement(By.id("email")).sendKeys(datas.get(2));
+		driver.findElement(By.xpath("(//*[@id='message'])[2]")).sendKeys(datas.get(3));
+		driver.findElement(By.id("telephoneno")).sendKeys(datas.get(4));
+		driver.findElement(By.xpath("//*[@type='submit']")).click();
+
+	}
+	
+	@When("enter the customer details")
+	public void enter_the_customer_details1(io.cucumber.datatable.DataTable dataTable) {
 
 		Map<String, String> datas = dataTable.asMap(String.class, String.class);
 
@@ -41,6 +55,31 @@ public class Addcustomer {
 
 	}
 
+
+	@When("enter the customer detail")
+	public void enter_the_customer_detail(io.cucumber.datatable.DataTable dataTable) {
+		List<List<String>> dataList = dataTable.asLists(String.class);
+
+		driver.findElement(By.id("fname")).sendKeys(dataList.get(0).get(0));
+		driver.findElement(By.id("lname")).sendKeys(dataList.get(1).get(0));
+		driver.findElement(By.id("email")).sendKeys(dataList.get(3).get(2));
+		driver.findElement(By.xpath("(//*[@id='message'])[2]")).sendKeys(dataList.get(0).get(3));
+		driver.findElement(By.id("telephoneno")).sendKeys(dataList.get(3).get(4));
+		driver.findElement(By.xpath("//*[@type='submit']")).click();
+	}
+	@When("enter the customer details{int}")
+	public void enter_the_customer_details(Integer int1, io.cucumber.datatable.DataTable dataTable) {
+		List<Map<String, String>> datas = dataTable.asMaps(String.class, String.class);
+
+		driver.findElement(By.id("fname")).sendKeys(datas.get(1).get("fname"));
+		driver.findElement(By.id("lname")).sendKeys(datas.get(2).get("lname"));
+		driver.findElement(By.id("email")).sendKeys(datas.get(3).get("lname"));
+		driver.findElement(By.xpath("(//*[@id='message'])[2]")).sendKeys(datas.get(4).get("address"));
+		driver.findElement(By.id("telephoneno")).sendKeys(datas.get(5).get("phone"));
+		driver.findElement(By.xpath("//*[@type='submit']")).click();
+
+
+	}
 	@When("click the customer details {string},{string},{string},{string},{string}")
 	public void click_the_customer_details(String A, String B, String C, String D, String E) {
 		driver.findElement(By.id("fname")).sendKeys(A);
@@ -50,7 +89,7 @@ public class Addcustomer {
 		driver.findElement(By.id("telephoneno")).sendKeys(E);
 		driver.findElement(By.xpath("//*[@type='submit']")).click();
 
-	}
+	}	
 
 	@Then("I validate the outcomes")
 	public void i_validate_the_outcomes() {
